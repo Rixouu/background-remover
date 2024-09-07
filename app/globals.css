@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 1rem;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .App {
+    @apply flex flex-col min-h-screen p-6 md:p-12;
+    background-image: radial-gradient(circle, var(--tw-gradient-stops));
+    --tw-gradient-from: hsl(var(--background));
+    --tw-gradient-to: hsl(var(--secondary));
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  }
+
+  header {
+    @apply bg-card text-card-foreground py-6 px-8 rounded-2xl shadow-custom mb-12 hover:shadow-custom-hover transition-shadow duration-300;
+  }
+
+  h1 {
+    @apply text-4xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600;
+  }
+
+  main {
+    @apply flex-1 flex flex-col items-center justify-start max-w-7xl mx-auto w-full;
+  }
+
+  #upload-container {
+    @apply w-full max-w-2xl mb-12;
+  }
+
+  #drag-drop-area {
+    @apply border-2 border-dashed border-primary/30 rounded-2xl p-12 text-center cursor-pointer transition-all duration-300 bg-card hover:bg-primary/5 hover:border-primary/50 shadow-custom hover:shadow-custom-hover;
+    border-width: 3px;
+  }
+
+  #preview-container {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl bg-card rounded-2xl p-8 shadow-custom;
+  }
+
+  .preview-box {
+    @apply flex flex-col items-center bg-muted rounded-xl p-6 shadow-inner;
+  }
+
+  .preview-box h3 {
+    @apply text-xl font-semibold mb-4 text-primary;
+  }
+
+  .preview-box img,
+  .preview-box canvas {
+    @apply max-w-full h-auto object-contain rounded-lg shadow-md border-4 border-white;
+  }
+
+  #download-btn {
+    @apply mt-8 px-8 py-4 bg-gradient-to-r from-primary to-purple-600 text-white rounded-full font-medium transition-all duration-300 hover:from-primary/90 hover:to-purple-600/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1;
+  }
+
+  #loading {
+    @apply text-center mt-8 font-medium text-muted-foreground;
+  }
+
+  progress {
+    @apply w-full max-w-md h-3 mt-4 rounded-full overflow-hidden bg-secondary shadow-inner;
+  }
+
+  progress::-webkit-progress-bar {
+    @apply bg-secondary rounded-full;
+  }
+
+  progress::-webkit-progress-value {
+    @apply bg-gradient-to-r from-primary to-purple-600 rounded-full;
+  }
+
+  progress::-moz-progress-bar {
+    @apply bg-gradient-to-r from-primary to-purple-600 rounded-full;
+  }
+}
