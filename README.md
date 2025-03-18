@@ -1,15 +1,30 @@
 # Background Remover
 
-This project is a web application that removes backgrounds from images using AI technology.
+A modern web application that removes backgrounds from images using AI technology, built with Next.js and Shadcn UI.
+
+## Features
+
+- Upload images up to 5MB in size
+- Remove backgrounds with advanced edge detection
+- View side-by-side comparison of original and processed images
+- Download processed images with transparent backgrounds
+- Dark mode support with theme persistence
+- Responsive design for all device sizes
+- No watermarks, no signup required, no server uploads
+
+## Technology Stack
+
+- **Frontend**: Next.js, React, TypeScript
+- **UI Components**: Shadcn UI, Radix UI
+- **Styling**: Tailwind CSS
+- **Theme Management**: next-themes
 
 ## Getting Started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and uses Next.js.
-
 ### Prerequisites
 
-- Node.js
-- npm
+- Node.js 18.x or later
+- npm or yarn
 
 ### Installation
 
@@ -35,8 +50,7 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The page will reload when you make changes.
 
 ### `npm run build`
 
@@ -47,18 +61,29 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 Starts the production server after running `npm run build`.
 
-## Features
+## How It Works
 
-- Upload images
-- Remove backgrounds from images using AI
-- View and download processed images
+The app uses client-side image processing techniques to remove backgrounds:
 
-## Learn More
+1. **Edge Detection**: Uses Sobel operators to identify edges in the image
+2. **Color Segmentation**: Samples colors from the image edges to identify likely background colors
+3. **Mask Combination**: Combines edge detection and color segmentation to create a foreground mask
+4. **Alpha Channel Modification**: Applies the mask to the image's alpha channel
+5. **Edge Refinement**: Smooths the edges of the foreground object for a more natural look
 
-To learn more about Next.js, take a look at the following resources:
+All processing happens directly in the browser - your images are never uploaded to a server.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Customization
+
+You can customize the look and feel by modifying the Tailwind configuration in `tailwind.config.js` or the global styles in `app/globals.css`.
+
+## Browser Compatibility
+
+This application is compatible with all modern browsers including:
+- Chrome
+- Firefox
+- Safari
+- Edge
 
 ## Contributing
 
