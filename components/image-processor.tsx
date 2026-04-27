@@ -5,6 +5,7 @@ import { DownloadIcon, ReloadIcon } from "@radix-ui/react-icons"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ImageUploader } from "@/components/image-uploader"
 import { ImagePreview } from "@/components/image-preview"
 
@@ -45,21 +46,16 @@ export function ImageProcessor() {
 
       setProgress(20)
       const edgeData = detectEdges(data, canvas.width, canvas.height)
-
       setProgress(40)
       const foregroundMask = colorBasedSegmentation(data, canvas.width, canvas.height)
-
       setProgress(60)
       const combinedMask = combineMasks(edgeData, foregroundMask, canvas.width, canvas.height)
-
       setProgress(80)
       applyMask(data, combinedMask)
-
       setProgress(90)
       refineEdges(data, canvas.width, canvas.height)
 
       ctx.putImageData(imageData, 0, 0)
-
       setProcessedImage(canvas.toDataURL())
       setProgress(100)
 
@@ -90,77 +86,70 @@ export function ImageProcessor() {
   }
 
   return (
-    <div className="w-full space-y-10">
-      {!originalImage ? (
-        <ImageUploader onImageUpload={handleImageUpload} />
-      ) : (
-        <div className="space-y-8 animate-in fade-in zoom-in duration-500">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-            <ImagePreview title="Original Image" imageSrc={originalImage} />
-            <ImagePreview 
-              title="Processed Image" 
-              imageSrc={processedImage} 
-              isProcessed={true} 
-              isLoading={isLoading} 
-            />
-          </div>
-          
-          <div className="flex flex-col space-y-6 pt-4 border-t border-primary/5">
-            {isLoading ? (
-              <div className="space-y-3">
-                <div className="flex justify-between text-xs font-bold text-primary uppercase tracking-widest">
-                  <span>Removing Background</span>
-                  <span>{progress}%</span>
-                </div>
-                <Progress value={progress} className="h-3 rounded-full" />
-              </div>
-            ) : (
-              <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
-                {!processedImage ? (
-                  <Button 
-                    size="lg"
-                    onClick={handleRemoveBackground} 
-                    className="w-full sm:w-auto min-w-[240px] rounded-2xl h-14 text-lg font-bold shadow-xl shadow-primary/20 hover:scale-[1.02] transition-all duration-300"
-                  >
-                    Remove Background
-                  </Button>
-                ) : (
-                  <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
-                    <Button 
-                      size="lg"
-                      onClick={handleDownload} 
-                      className="w-full sm:w-auto min-w-[200px] rounded-2xl h-14 text-lg font-bold shadow-xl shadow-primary/20 hover:scale-[1.02] transition-all duration-300"
-                    >
-                      <DownloadIcon className="mr-3 h-5 w-5" />
-                      Download HD
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      size="lg"
-                      onClick={handleReset} 
-                      className="w-full sm:w-auto rounded-2xl h-14 px-8 text-lg font-bold border-2 hover:bg-destructive/10 hover:text-destructive hover:border-destructive/20 transition-all duration-300"
-                    >
-                      <ReloadIcon className="mr-3 h-5 w-5" />
-                      New Project
-                    </Button>
-                  </div>
-                )}
-              </div>
-            )}
+    <Card className="w-full max-w-2xl mx-auto rounded-3xl shadow-xl border-border">
+      <CardHeader>
+        <CardTitle className="text-2xl font-bold">Remove Background</CardTitle>
+        <CardDescription>Upload an image to remove its background instantly.</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        {!originalImage ? (
+          <ImageUploader onImageUpload={handleImageUpload} />
+        ) : (
+          <div className="space-y-6 animate-in fade-in zoom-in duration-500">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <ImagePreview title="Original" imageSrc={originalImage} />
+              <ImagePreview 
+                title="Processed" 
+                imageSrc={processedImage} 
+                isProcessed={true} 
+                isLoading={isLoading} 
+              />
+            </div>
             
-            {!isLoading && !processedImage && (
-               <Button 
-                variant="ghost" 
-                onClick={handleReset} 
-                className="mx-auto w-fit text-muted-foreground font-bold hover:bg-transparent hover:text-foreground"
-              >
-                Cancel and Start Over
-              </Button>
-            )}
+            <div className="space-y-4 pt-4 border-t border-border">
+              {isLoading ? (
+                <div className="space-y-2">
+                  <div className="flex justify-between text-xs font-bold text-primary uppercase tracking-widest">
+                    <span>Processing</span>
+                    <span>{progress}%</span>
+                  </div>
+                  <Progress value={progress} className="h-2 rounded-full" />
+                </div>
+              ) : (
+                <div className="flex flex-col gap-3">
+                  {!processedImage ? (
+                    <Button 
+                      onClick={handleRemoveBackground} 
+                      className="w-full h-12 text-base font-bold bg-primary hover:bg-primary/90 text-white transition-all rounded-xl shadow-lg shadow-primary/20"
+                    >
+                      Process Image
+                    </Button>
+                  ) : (
+                    <div className="flex flex-col gap-3">
+                      <Button 
+                        onClick={handleDownload} 
+                        className="w-full h-12 text-base font-bold bg-primary hover:bg-primary/90 text-white transition-all rounded-xl shadow-lg shadow-primary/20"
+                      >
+                        <DownloadIcon className="mr-2 h-5 w-5" />
+                        Download Result
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        onClick={handleReset} 
+                        className="w-full h-12 text-base font-bold border-2 rounded-xl transition-all"
+                      >
+                        <ReloadIcon className="mr-2 h-5 w-5" />
+                        Start New
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </CardContent>
+    </Card>
   )
 }
 
@@ -194,72 +183,60 @@ function detectEdges(data: Uint8ClampedArray, width: number, height: number): Ui
 function colorBasedSegmentation(data: Uint8ClampedArray, width: number, height: number): Uint8Array {
   const mask = new Uint8Array(width * height)
   const samples = sampleBackgroundColors(data, width, height)
-  const threshold = 30 // Adjust this value to fine-tune segmentation
+  const threshold = 30
 
   for (let i = 0; i < data.length; i += 4) {
     const r = data[i], g = data[i + 1], b = data[i + 2]
     let isForeground = true
-
     for (const sample of samples) {
       const dr = r - sample[0]
       const dg = g - sample[1]
       const db = b - sample[2]
       const distance = Math.sqrt(dr * dr + dg * dg + db * db)
-      
       if (distance < threshold) {
         isForeground = false
         break
       }
     }
-
     mask[i / 4] = isForeground ? 255 : 0
   }
-  
   return mask
 }
 
 function sampleBackgroundColors(data: Uint8ClampedArray, width: number, height: number): number[][] {
   const samples: number[][] = []
-  
-  // Sample from edges - assuming background is often at the edges
   for (let i = 0; i < width; i += width / 10) {
-    samples.push([data[i * 4], data[i * 4 + 1], data[i * 4 + 2]])
-    samples.push([data[(height - 1) * width * 4 + i * 4], data[(height - 1) * width * 4 + i * 4 + 1], data[(height - 1) * width * 4 + i * 4 + 2]])
+    samples.push([data[Math.floor(i) * 4], data[Math.floor(i) * 4 + 1], data[Math.floor(i) * 4 + 2]])
+    samples.push([data[(height - 1) * width * 4 + Math.floor(i) * 4], data[(height - 1) * width * 4 + Math.floor(i) * 4 + 1], data[(height - 1) * width * 4 + Math.floor(i) * 4 + 2]])
   }
-  
   for (let i = 0; i < height; i += height / 10) {
-    samples.push([data[i * width * 4], data[i * width * 4 + 1], data[i * width * 4 + 2]])
-    samples.push([data[i * width * 4 + (width - 1) * 4], data[i * width * 4 + (width - 1) * 4 + 1], data[i * width * 4 + (width - 1) * 4 + 2]])
+    samples.push([data[Math.floor(i) * width * 4], data[Math.floor(i) * width * 4 + 1], data[Math.floor(i) * width * 4 + 2]])
+    samples.push([data[Math.floor(i) * width * 4 + (width - 1) * 4], data[Math.floor(i) * width * 4 + (width - 1) * 4 + 1], data[Math.floor(i) * width * 4 + (width - 1) * 4 + 2]])
   }
-  
   return samples
 }
 
 function combineMasks(edgeData: Uint8Array, foregroundMask: Uint8Array, width: number, height: number): Uint8Array {
   const combinedMask = new Uint8Array(width * height)
-  
   for (let i = 0; i < width * height; i++) {
     combinedMask[i] = edgeData[i] > 30 || foregroundMask[i] > 0 ? 255 : 0
   }
-  
   return combinedMask
 }
 
 function applyMask(data: Uint8ClampedArray, mask: Uint8Array): void {
   for (let i = 0; i < mask.length; i++) {
-    data[i * 4 + 3] = mask[i] // Set alpha channel based on mask
+    data[i * 4 + 3] = mask[i]
   }
 }
 
 function refineEdges(data: Uint8ClampedArray, width: number, height: number): void {
-  // Simple alpha matting
   for (let y = 1; y < height - 1; y++) {
     for (let x = 1; x < width - 1; x++) {
       const idx = (y * width + x) * 4
       if (data[idx + 3] > 0 && data[idx + 3] < 255) {
         let sumAlpha = 0
         let count = 0
-        
         for (let j = -1; j <= 1; j++) {
           for (let i = -1; i <= 1; i++) {
             if (i === 0 && j === 0) continue
@@ -268,10 +245,9 @@ function refineEdges(data: Uint8ClampedArray, width: number, height: number): vo
             count++
           }
         }
-        
         const avgAlpha = sumAlpha / count
         data[idx + 3] = avgAlpha > 127 ? 255 : 0
       }
     }
   }
-} 
+}
