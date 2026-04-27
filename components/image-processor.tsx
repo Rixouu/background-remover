@@ -89,49 +89,49 @@ export function ImageProcessor() {
       {!originalImage ? (
         <ImageUploader onImageUpload={handleImageUpload} />
       ) : (
-        <div className="space-y-6 animate-in fade-in zoom-in duration-500">
+        <div className="space-y-8 animate-in fade-in zoom-in duration-500">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <ImagePreview title="Original" imageSrc={originalImage} />
+            <ImagePreview title="Original Image" imageSrc={originalImage} />
             <ImagePreview 
-              title="Processed" 
+              title="Processed Image" 
               imageSrc={processedImage} 
               isProcessed={true} 
               isLoading={isLoading} 
             />
           </div>
           
-          <div className="space-y-4 pt-6">
+          <div className="space-y-4 pt-4">
             {isLoading ? (
-              <div className="space-y-2">
-                <div className="flex justify-between text-[10px] font-black text-primary uppercase tracking-widest">
-                  <span>Removing Background...</span>
+              <div className="space-y-3">
+                <div className="flex justify-between text-[10px] font-black text-primary uppercase tracking-[0.2em]">
+                  <span>Optimizing AI Mask</span>
                   <span>{progress}%</span>
                 </div>
-                <Progress value={progress} className="h-2 rounded-full bg-zinc-100" />
+                <Progress value={progress} className="h-3 rounded-full bg-zinc-100" />
               </div>
             ) : (
               <div className="flex flex-col gap-3">
                 {!processedImage ? (
                   <Button 
                     onClick={handleRemoveBackground} 
-                    className="w-full h-14 text-base font-bold bg-primary hover:bg-primary/90 text-white transition-all rounded-2xl shadow-xl shadow-primary/20"
+                    className="w-full h-16 text-lg font-black uppercase tracking-wider bg-primary hover:bg-primary/90 text-white transition-all rounded-3xl shadow-2xl shadow-primary/30 active:scale-95"
                   >
-                    <MagicWandIcon className="mr-2 h-5 w-5" />
+                    <MagicWandIcon className="mr-3 h-6 w-6" />
                     Remove Background
                   </Button>
                 ) : (
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-4">
                     <Button 
                       onClick={handleDownload} 
-                      className="w-full h-14 text-base font-bold bg-primary hover:bg-primary/90 text-white transition-all rounded-2xl shadow-xl shadow-primary/20"
+                      className="w-full h-16 text-lg font-black uppercase tracking-wider bg-primary hover:bg-primary/90 text-white transition-all rounded-3xl shadow-2xl shadow-primary/30 active:scale-95"
                     >
-                      <DownloadIcon className="mr-2 h-5 w-5" />
+                      <DownloadIcon className="mr-3 h-6 w-6" />
                       Download HD PNG
                     </Button>
                     <Button 
                       variant="ghost" 
                       onClick={handleReset} 
-                      className="w-full h-12 text-sm font-bold text-zinc-400 hover:text-zinc-600 transition-all"
+                      className="w-full h-12 text-xs font-black uppercase tracking-widest text-zinc-400 hover:text-zinc-800 transition-all"
                     >
                       <ReloadIcon className="mr-2 h-4 w-4" />
                       Upload Different Image
@@ -147,7 +147,7 @@ export function ImageProcessor() {
   )
 }
 
-// ... (Rest of the processing functions remain same)
+// Image processing functions
 function detectEdges(data: Uint8ClampedArray, width: number, height: number): Uint8Array {
   const grayscale = new Uint8Array(width * height)
   for (let i = 0; i < data.length; i += 4) {

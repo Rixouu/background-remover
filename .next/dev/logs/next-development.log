@@ -2,3 +2,9 @@
 {"timestamp":"00:00:09.187","source":"Browser","level":"LOG","message":"SW registered:  {}"}
 {"timestamp":"00:01:23.661","source":"Server","level":"LOG","message":"✓ Compiled in 0ms"}
 {"timestamp":"00:01:40.880","source":"Server","level":"LOG","message":"✓ Compiled in 127ms"}
+{"timestamp":"00:02:24.425","source":"Browser","level":"LOG","message":"SW registered:  {}"}
+{"timestamp":"00:02:26.859","source":"Browser","level":"LOG","message":"SW registered:  {}"}
+{"timestamp":"00:02:27.963","source":"Browser","level":"LOG","message":"SW registered:  {}"}
+{"timestamp":"00:03:42.630","source":"Server","level":"LOG","message":"✓ Compiled in 103ms"}
+{"timestamp":"00:04:11.014","source":"Server","level":"LOG","message":"✓ Compiled in 56ms"}
+{"timestamp":"00:04:14.387","source":"Browser","level":"LOG","message":"SW registered:  {}"}

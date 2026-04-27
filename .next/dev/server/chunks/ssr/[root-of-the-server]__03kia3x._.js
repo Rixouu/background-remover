@@ -56,22 +56,22 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f
 ;
 function Home() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
-        className: "flex min-h-screen flex-col items-center justify-center p-4 md:p-24 bg-background",
+        className: "flex min-h-screen flex-col items-center justify-center p-4 md:p-24 bg-zinc-100",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "w-full max-w-2xl bg-card rounded-[2.5rem] shadow-xl shadow-zinc-200/50 border border-zinc-100 p-8 md:p-12",
+                className: "w-full max-w-2xl bg-white rounded-[2.5rem] shadow-2xl shadow-zinc-300/50 border border-zinc-200 p-8 md:p-12 animate-in fade-in zoom-in duration-700",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex flex-col items-center mb-10 text-center",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "w-20 h-20 bg-primary rounded-2xl flex items-center justify-center text-white mb-6 shadow-xl shadow-primary/20 transition-transform hover:scale-105 duration-300",
+                                className: "w-24 h-24 bg-primary rounded-3xl flex items-center justify-center mb-6 shadow-2xl shadow-primary/30 overflow-hidden transition-transform hover:scale-110 duration-500",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
                                     src: "/icon-bg-remover.png",
                                     alt: "Logo",
-                                    width: 40,
-                                    height: 40,
-                                    className: "brightness-0 invert"
+                                    width: 96,
+                                    height: 96,
+                                    className: "object-cover"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/Repositories/02-Pro/background-remover/app/page.tsx",
                                     lineNumber: 10,
@@ -83,7 +83,7 @@ function Home() {
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                                className: "text-4xl font-bold tracking-tight text-zinc-900 mb-3",
+                                className: "text-4xl font-black tracking-tighter text-zinc-900 mb-3",
                                 children: "Background Remover"
                             }, void 0, false, {
                                 fileName: "[project]/Documents/Repositories/02-Pro/background-remover/app/page.tsx",
@@ -91,7 +91,7 @@ function Home() {
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-zinc-500 max-w-sm font-medium leading-relaxed",
+                                className: "text-zinc-500 max-w-sm font-semibold leading-relaxed",
                                 children: "Professional-grade background removal directly in your browser. No watermarks, no signups."
                             }, void 0, false, {
                                 fileName: "[project]/Documents/Repositories/02-Pro/background-remover/app/page.tsx",
@@ -110,13 +110,13 @@ function Home() {
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 text-sm",
+                        className: "mt-12 grid grid-cols-1 md:grid-cols-2 gap-6",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "bg-zinc-50/50 rounded-2xl p-5 border border-zinc-100/80",
+                                className: "bg-zinc-50 rounded-3xl p-6 border border-zinc-100 transition-colors hover:bg-zinc-100/50",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
-                                        className: "font-bold text-zinc-900 mb-1",
+                                        className: "font-black text-zinc-900 mb-1 text-sm uppercase tracking-wider",
                                         children: "Privacy First"
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/Repositories/02-Pro/background-remover/app/page.tsx",
@@ -124,7 +124,7 @@ function Home() {
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                        className: "text-zinc-500 leading-relaxed",
+                                        className: "text-zinc-500 text-sm leading-relaxed font-medium",
                                         children: "Processed locally. Your images never leave your device."
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/Repositories/02-Pro/background-remover/app/page.tsx",
@@ -138,10 +138,10 @@ function Home() {
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "bg-zinc-50/50 rounded-2xl p-5 border border-zinc-100/80",
+                                className: "bg-zinc-50 rounded-3xl p-6 border border-zinc-100 transition-colors hover:bg-zinc-100/50",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
-                                        className: "font-bold text-zinc-900 mb-1",
+                                        className: "font-black text-zinc-900 mb-1 text-sm uppercase tracking-wider",
                                         children: "HD Export"
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/Repositories/02-Pro/background-remover/app/page.tsx",
@@ -149,7 +149,7 @@ function Home() {
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                        className: "text-zinc-500 leading-relaxed",
+                                        className: "text-zinc-500 text-sm leading-relaxed font-medium",
                                         children: "High-resolution PNGs with perfect transparency."
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/Repositories/02-Pro/background-remover/app/page.tsx",
@@ -175,9 +175,9 @@ function Home() {
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
-                className: "mt-12 text-center",
+                className: "mt-12 text-center opacity-30",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                    className: "text-[10px] uppercase tracking-[0.2em] font-black text-zinc-300",
+                    className: "text-[10px] uppercase tracking-[0.3em] font-black text-zinc-900",
                     children: [
                         "Built with Next.js & AI • © ",
                         new Date().getFullYear()

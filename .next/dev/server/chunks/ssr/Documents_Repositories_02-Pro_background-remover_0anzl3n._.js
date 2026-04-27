@@ -448,13 +448,13 @@ function ImageProcessor() {
             lineNumber: 90,
             columnNumber: 9
         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "space-y-6 animate-in fade-in zoom-in duration-500",
+            className: "space-y-8 animate-in fade-in zoom-in duration-500",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "grid grid-cols-1 sm:grid-cols-2 gap-4",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$components$2f$image$2d$preview$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ImagePreview"], {
-                            title: "Original",
+                            title: "Original Image",
                             imageSrc: originalImage
                         }, void 0, false, {
                             fileName: "[project]/Documents/Repositories/02-Pro/background-remover/components/image-processor.tsx",
@@ -462,7 +462,7 @@ function ImageProcessor() {
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$components$2f$image$2d$preview$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ImagePreview"], {
-                            title: "Processed",
+                            title: "Processed Image",
                             imageSrc: processedImage,
                             isProcessed: true,
                             isLoading: isLoading
@@ -478,15 +478,15 @@ function ImageProcessor() {
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "space-y-4 pt-6",
+                    className: "space-y-4 pt-4",
                     children: isLoading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "space-y-2",
+                        className: "space-y-3",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex justify-between text-[10px] font-black text-primary uppercase tracking-widest",
+                                className: "flex justify-between text-[10px] font-black text-primary uppercase tracking-[0.2em]",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                        children: "Removing Background..."
+                                        children: "Optimizing AI Mask"
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/Repositories/02-Pro/background-remover/components/image-processor.tsx",
                                         lineNumber: 107,
@@ -510,7 +510,7 @@ function ImageProcessor() {
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$components$2f$ui$2f$progress$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Progress"], {
                                 value: progress,
-                                className: "h-2 rounded-full bg-zinc-100"
+                                className: "h-3 rounded-full bg-zinc-100"
                             }, void 0, false, {
                                 fileName: "[project]/Documents/Repositories/02-Pro/background-remover/components/image-processor.tsx",
                                 lineNumber: 110,
@@ -525,10 +525,10 @@ function ImageProcessor() {
                         className: "flex flex-col gap-3",
                         children: !processedImage ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                             onClick: handleRemoveBackground,
-                            className: "w-full h-14 text-base font-bold bg-primary hover:bg-primary/90 text-white transition-all rounded-2xl shadow-xl shadow-primary/20",
+                            className: "w-full h-16 text-lg font-black uppercase tracking-wider bg-primary hover:bg-primary/90 text-white transition-all rounded-3xl shadow-2xl shadow-primary/30 active:scale-95",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f40$radix$2d$ui$2f$react$2d$icons$2f$dist$2f$react$2d$icons$2e$esm$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["MagicWandIcon"], {
-                                    className: "mr-2 h-5 w-5"
+                                    className: "mr-3 h-6 w-6"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/Repositories/02-Pro/background-remover/components/image-processor.tsx",
                                     lineNumber: 119,
@@ -541,14 +541,14 @@ function ImageProcessor() {
                             lineNumber: 115,
                             columnNumber: 19
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex flex-col gap-3",
+                            className: "flex flex-col gap-4",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                                     onClick: handleDownload,
-                                    className: "w-full h-14 text-base font-bold bg-primary hover:bg-primary/90 text-white transition-all rounded-2xl shadow-xl shadow-primary/20",
+                                    className: "w-full h-16 text-lg font-black uppercase tracking-wider bg-primary hover:bg-primary/90 text-white transition-all rounded-3xl shadow-2xl shadow-primary/30 active:scale-95",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f40$radix$2d$ui$2f$react$2d$icons$2f$dist$2f$react$2d$icons$2e$esm$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DownloadIcon"], {
-                                            className: "mr-2 h-5 w-5"
+                                            className: "mr-3 h-6 w-6"
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/Repositories/02-Pro/background-remover/components/image-processor.tsx",
                                             lineNumber: 128,
@@ -564,7 +564,7 @@ function ImageProcessor() {
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                                     variant: "ghost",
                                     onClick: handleReset,
-                                    className: "w-full h-12 text-sm font-bold text-zinc-400 hover:text-zinc-600 transition-all",
+                                    className: "w-full h-12 text-xs font-black uppercase tracking-widest text-zinc-400 hover:text-zinc-800 transition-all",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$Repositories$2f$02$2d$Pro$2f$background$2d$remover$2f$node_modules$2f40$radix$2d$ui$2f$react$2d$icons$2f$dist$2f$react$2d$icons$2e$esm$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ReloadIcon"], {
                                             className: "mr-2 h-4 w-4"
@@ -608,7 +608,7 @@ function ImageProcessor() {
         columnNumber: 5
     }, this);
 }
-// ... (Rest of the processing functions remain same)
+// Image processing functions
 function detectEdges(data, width, height) {
     const grayscale = new Uint8Array(width * height);
     for(let i = 0; i < data.length; i += 4){
