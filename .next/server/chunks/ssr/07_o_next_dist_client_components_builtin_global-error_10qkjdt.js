@@ -1,3 +1,0 @@
-module.exports=[50237,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(62458);a.n(d("[project]/Documents/Repositories/02-Pro/background-remover/node_modules/next/dist/client/components/builtin/global-error.js <module evaluation>"))},3336,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(62458);a.n(d("[project]/Documents/Repositories/02-Pro/background-remover/node_modules/next/dist/client/components/builtin/global-error.js"))},92915,a=>{"use strict";a.i(50237);var b=a.i(3336);a.n(b)},92031,a=>{a.n(a.i(92915))}];
-
-//# sourceMappingURL=07_o_next_dist_client_components_builtin_global-error_10qkjdt.js.map
