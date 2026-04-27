@@ -1,94 +1,74 @@
-# Background Remover
+<div align="center">
+  <img src="public/icon-bg-remover.png" alt="Background Remover Logo" width="120" height="120" />
+  <h1>Background Remover</h1>
+  <p>Professional-grade background removal directly in your browser using AI and edge detection.</p>
 
-A modern web application that removes backgrounds from images using AI technology, built with Next.js and Shadcn UI.
+  <p>
+    <img src="https://img.shields.io/badge/Next.js-16.2-black?style=for-the-badge&logo=next.js" alt="Next.js" />
+    <img src="https://img.shields.io/badge/React-19.2-blue?style=for-the-badge&logo=react" alt="React" />
+    <img src="https://img.shields.io/badge/Tailwind_CSS-4.2-38B2AC?style=for-the-badge&logo=tailwind-css" alt="Tailwind CSS" />
+    <img src="https://img.shields.io/badge/TypeScript-6.0-blue?style=for-the-badge&logo=typescript" alt="TypeScript" />
+  </p>
+</div>
 
-## Features
+---
 
-- Upload images up to 5MB in size
-- Remove backgrounds with advanced edge detection
-- View side-by-side comparison of original and processed images
-- Download processed images with transparent backgrounds
-- Dark mode support with theme persistence
-- Responsive design for all device sizes
-- No watermarks, no signup required, no server uploads
+Background Remover is a modern, privacy-focused web application built around one simple mission: providing a seamless, serverless way to isolate subjects from their backgrounds. No uploads, no accounts, just pure client-side processing power.
 
-## Technology Stack
+### 🖼️ Subject & Style
+- **Pure Privacy**: All processing happens in your browser. Your images never leave your device.
+- **Edge Mastery**: Advanced edge detection and color segmentation for clean cutouts.
+- **Side-by-Side**: Real-time comparison between original and processed images.
+- **Transparency First**: Download high-quality PNGs with alpha transparency.
 
-- **Frontend**: Next.js, React, TypeScript
-- **UI Components**: Shadcn UI, Radix UI
-- **Styling**: Tailwind CSS
-- **Theme Management**: next-themes
+### 📱 Progressive Web App (PWA)
+- **Installable**: Add to your home screen for a native app experience.
+- **Offline Capable**: Basic functionality works even without an internet connection.
+- **Fast & Fluid**: Optimized for mobile performance with safe-area handling.
 
-## Getting Started
+### 🛠️ Technology Stack
+- **Frontend**: Next.js 16 (App Router), React 19
+- **Styling**: Tailwind CSS 4, Shadcn UI, Radix UI
+- **Processing**: Client-side Canvas API & Edge Detection Algorithms
+- **Icons**: Lucide React
+- **PWA**: Custom Service Worker implementation
 
-### Prerequisites
+### 🚀 Getting Started
 
-- Node.js 18.x or later
-- npm or yarn
+#### Prerequisites
+- Node.js 20+
+- npm
 
-### Installation
+#### Installation
+```bash
+# Clone the repository
+git clone https://github.com/Rixouu/background-remover.git
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/your-username/background-remover.git
-   ```
-2. Navigate to the project directory:
-   ```
-   cd background-remover
-   ```
-3. Install dependencies:
-   ```
-   npm install
-   ```
+# Install dependencies
+npm install
 
-## Available Scripts
+# Run development server
+npm run dev
+```
 
-In the project directory, you can run:
+Default dev URL: [http://localhost:3000](http://localhost:3000)
 
-### `npm run dev`
+### 🧩 How It Works
+The application leverages a multi-stage processing pipeline:
+1. **Sobel Edge Detection**: Identifies sharp transitions in image intensity.
+2. **Color Sampling**: Analyzes background regions for dominant color patterns.
+3. **Mask Generation**: Creates a precise alpha mask combining edge and color data.
+4. **Refinement**: Smooths boundaries to prevent "jagged" edges.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 🖥️ Deployment
+The project is optimized for Vercel:
+```bash
+npm run build
+npm run start
+```
 
-The page will reload when you make changes.
+---
 
-### `npm run build`
-
-Builds the app for production to the `.next` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-### `npm start`
-
-Starts the production server after running `npm run build`.
-
-## How It Works
-
-The app uses client-side image processing techniques to remove backgrounds:
-
-1. **Edge Detection**: Uses Sobel operators to identify edges in the image
-2. **Color Segmentation**: Samples colors from the image edges to identify likely background colors
-3. **Mask Combination**: Combines edge detection and color segmentation to create a foreground mask
-4. **Alpha Channel Modification**: Applies the mask to the image's alpha channel
-5. **Edge Refinement**: Smooths the edges of the foreground object for a more natural look
-
-All processing happens directly in the browser - your images are never uploaded to a server.
-
-## Customization
-
-You can customize the look and feel by modifying the Tailwind configuration in `tailwind.config.js` or the global styles in `app/globals.css`.
-
-## Browser Compatibility
-
-This application is compatible with all modern browsers including:
-- Chrome
-- Firefox
-- Safari
-- Edge
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+<div align="center">
+  <p>Built with ❤️ by <a href="https://github.com/Rixouu">Jonathan Rycx</a></p>
+</div>
