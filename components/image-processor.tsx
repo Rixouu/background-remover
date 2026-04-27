@@ -63,10 +63,10 @@ export function ImageProcessor() {
       setProcessedImage(canvas.toDataURL())
       setProgress(100)
 
-      toast.success("Your image has been processed successfully")
+      toast.success("Image processed successfully!")
     } catch (error) {
       console.error('Error processing image:', error)
-      toast.error("An error occurred while processing the image")
+      toast.error("Failed to process image")
     } finally {
       setIsLoading(false)
     }
@@ -90,12 +90,12 @@ export function ImageProcessor() {
   }
 
   return (
-    <div className="w-full max-w-5xl mx-auto space-y-8">
+    <div className="w-full space-y-10">
       {!originalImage ? (
         <ImageUploader onImageUpload={handleImageUpload} />
       ) : (
-        <>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-8 animate-in fade-in zoom-in duration-500">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             <ImagePreview title="Original Image" imageSrc={originalImage} />
             <ImagePreview 
               title="Processed Image" 
@@ -105,38 +105,60 @@ export function ImageProcessor() {
             />
           </div>
           
-          {isLoading ? (
-            <div className="space-y-2">
-              <div className="w-full">
-                <Progress value={progress} max={100} />
+          <div className="flex flex-col space-y-6 pt-4 border-t border-primary/5">
+            {isLoading ? (
+              <div className="space-y-3">
+                <div className="flex justify-between text-xs font-bold text-primary uppercase tracking-widest">
+                  <span>Removing Background</span>
+                  <span>{progress}%</span>
+                </div>
+                <Progress value={progress} className="h-3 rounded-full" />
               </div>
-              <p className="text-center text-sm text-muted-foreground">
-                Processing: {progress}%
-              </p>
-            </div>
-          ) : (
-            <div className="flex flex-col sm:flex-row gap-4 justify-between">
-              <Button 
-                onClick={handleRemoveBackground} 
-                disabled={isLoading || !!processedImage}
+            ) : (
+              <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+                {!processedImage ? (
+                  <Button 
+                    size="lg"
+                    onClick={handleRemoveBackground} 
+                    className="w-full sm:w-auto min-w-[240px] rounded-2xl h-14 text-lg font-bold shadow-xl shadow-primary/20 hover:scale-[1.02] transition-all duration-300"
+                  >
+                    Remove Background
+                  </Button>
+                ) : (
+                  <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
+                    <Button 
+                      size="lg"
+                      onClick={handleDownload} 
+                      className="w-full sm:w-auto min-w-[200px] rounded-2xl h-14 text-lg font-bold shadow-xl shadow-primary/20 hover:scale-[1.02] transition-all duration-300"
+                    >
+                      <DownloadIcon className="mr-3 h-5 w-5" />
+                      Download HD
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      size="lg"
+                      onClick={handleReset} 
+                      className="w-full sm:w-auto rounded-2xl h-14 px-8 text-lg font-bold border-2 hover:bg-destructive/10 hover:text-destructive hover:border-destructive/20 transition-all duration-300"
+                    >
+                      <ReloadIcon className="mr-3 h-5 w-5" />
+                      New Project
+                    </Button>
+                  </div>
+                )}
+              </div>
+            )}
+            
+            {!isLoading && !processedImage && (
+               <Button 
+                variant="ghost" 
+                onClick={handleReset} 
+                className="mx-auto w-fit text-muted-foreground font-bold hover:bg-transparent hover:text-foreground"
               >
-                {processedImage ? 'Background Removed' : 'Remove Background'}
+                Cancel and Start Over
               </Button>
-              
-              {processedImage && (
-                <Button onClick={handleDownload} variant="outline">
-                  <DownloadIcon className="mr-2 h-4 w-4" />
-                  Download
-                </Button>
-              )}
-            </div>
-          )}
-          
-          <Button onClick={handleReset} variant="ghost" className="w-full">
-            <ReloadIcon className="mr-2 h-4 w-4" />
-            Start Over
-          </Button>
-        </>
+            )}
+          </div>
+        </div>
       )}
     </div>
   )

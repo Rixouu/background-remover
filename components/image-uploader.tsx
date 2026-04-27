@@ -3,7 +3,6 @@
 import { useRef } from "react"
 import { UploadIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import { toast } from "sonner"
 
 interface ImageUploaderProps {
@@ -32,26 +31,42 @@ export function ImageUploader({ onImageUpload }: ImageUploaderProps) {
   const handleUpload = () => fileInputRef.current?.click()
 
   return (
-    <Card className="w-full bg-card">
-      <CardContent className="p-6">
-        <div
-          className="flex flex-col items-center justify-center border-2 border-dashed border-primary/30 dark:border-primary/40 rounded-lg p-12 space-y-4 cursor-pointer hover:border-primary transition-colors hover:bg-accent/50"
-          onClick={handleUpload}
-        >
-          <UploadIcon className="w-12 h-12 text-muted-foreground" />
-          <h2 className="text-xl font-semibold text-foreground">Drag and drop your image here</h2>
-          <p className="text-muted-foreground">or click to upload</p>
-          <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            accept="image/*"
-            className="hidden"
-            aria-label="Upload image"
-          />
-          <Button variant="outline" className="mt-4">Select Image</Button>
+    <div className="w-full">
+      <div
+        className="group relative flex flex-col items-center justify-center border-3 border-dashed border-primary/20 dark:border-primary/10 rounded-[2rem] p-16 space-y-6 cursor-pointer transition-all duration-300 hover:border-primary/40 hover:bg-primary/[0.02] dark:hover:bg-primary/[0.01]"
+        onClick={handleUpload}
+      >
+        <div className="icon-box h-16 w-16 mb-2 transform group-hover:scale-110 transition-transform duration-300">
+          <UploadIcon className="w-8 h-8 text-primary-foreground" />
         </div>
-      </CardContent>
-    </Card>
+        
+        <div className="space-y-2 text-center">
+          <h2 className="text-2xl font-bold tracking-tight text-foreground">
+            Upload your image
+          </h2>
+          <p className="text-muted-foreground font-medium">
+            Drag and drop your file here or click to browse
+          </p>
+        </div>
+
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept="image/*"
+          className="hidden"
+          aria-label="Upload image"
+        />
+        
+        <Button variant="outline" size="lg" className="rounded-2xl px-8 font-bold border-2 hover:bg-primary hover:text-white transition-all duration-300">
+          Select Image
+        </Button>
+        
+        <p className="text-xs text-muted-foreground/50 font-medium">
+          Supports JPG, PNG (Max 5MB)
+        </p>
+      </div>
+    </div>
   )
-} 
+}
+ 
