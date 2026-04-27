@@ -1,11 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { DownloadIcon, ReloadIcon } from "@radix-ui/react-icons"
+import { DownloadIcon, ReloadIcon, MagicWandIcon } from "@radix-ui/react-icons"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ImageUploader } from "@/components/image-uploader"
 import { ImagePreview } from "@/components/image-preview"
 
@@ -59,7 +58,7 @@ export function ImageProcessor() {
       setProcessedImage(canvas.toDataURL())
       setProgress(100)
 
-      toast.success("Image processed successfully!")
+      toast.success("Background removed!")
     } catch (error) {
       console.error('Error processing image:', error)
       toast.error("Failed to process image")
@@ -86,74 +85,69 @@ export function ImageProcessor() {
   }
 
   return (
-    <Card className="w-full max-w-2xl mx-auto rounded-3xl shadow-xl border-border">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold">Remove Background</CardTitle>
-        <CardDescription>Upload an image to remove its background instantly.</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        {!originalImage ? (
-          <ImageUploader onImageUpload={handleImageUpload} />
-        ) : (
-          <div className="space-y-6 animate-in fade-in zoom-in duration-500">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <ImagePreview title="Original" imageSrc={originalImage} />
-              <ImagePreview 
-                title="Processed" 
-                imageSrc={processedImage} 
-                isProcessed={true} 
-                isLoading={isLoading} 
-              />
-            </div>
-            
-            <div className="space-y-4 pt-4 border-t border-border">
-              {isLoading ? (
-                <div className="space-y-2">
-                  <div className="flex justify-between text-xs font-bold text-primary uppercase tracking-widest">
-                    <span>Processing</span>
-                    <span>{progress}%</span>
-                  </div>
-                  <Progress value={progress} className="h-2 rounded-full" />
-                </div>
-              ) : (
-                <div className="flex flex-col gap-3">
-                  {!processedImage ? (
-                    <Button 
-                      onClick={handleRemoveBackground} 
-                      className="w-full h-12 text-base font-bold bg-primary hover:bg-primary/90 text-white transition-all rounded-xl shadow-lg shadow-primary/20"
-                    >
-                      Process Image
-                    </Button>
-                  ) : (
-                    <div className="flex flex-col gap-3">
-                      <Button 
-                        onClick={handleDownload} 
-                        className="w-full h-12 text-base font-bold bg-primary hover:bg-primary/90 text-white transition-all rounded-xl shadow-lg shadow-primary/20"
-                      >
-                        <DownloadIcon className="mr-2 h-5 w-5" />
-                        Download Result
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        onClick={handleReset} 
-                        className="w-full h-12 text-base font-bold border-2 rounded-xl transition-all"
-                      >
-                        <ReloadIcon className="mr-2 h-5 w-5" />
-                        Start New
-                      </Button>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
+    <div className="space-y-6">
+      {!originalImage ? (
+        <ImageUploader onImageUpload={handleImageUpload} />
+      ) : (
+        <div className="space-y-6 animate-in fade-in zoom-in duration-500">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <ImagePreview title="Original" imageSrc={originalImage} />
+            <ImagePreview 
+              title="Processed" 
+              imageSrc={processedImage} 
+              isProcessed={true} 
+              isLoading={isLoading} 
+            />
           </div>
-        )}
-      </CardContent>
-    </Card>
+          
+          <div className="space-y-4 pt-6">
+            {isLoading ? (
+              <div className="space-y-2">
+                <div className="flex justify-between text-[10px] font-black text-primary uppercase tracking-widest">
+                  <span>Removing Background...</span>
+                  <span>{progress}%</span>
+                </div>
+                <Progress value={progress} className="h-2 rounded-full bg-zinc-100" />
+              </div>
+            ) : (
+              <div className="flex flex-col gap-3">
+                {!processedImage ? (
+                  <Button 
+                    onClick={handleRemoveBackground} 
+                    className="w-full h-14 text-base font-bold bg-primary hover:bg-primary/90 text-white transition-all rounded-2xl shadow-xl shadow-primary/20"
+                  >
+                    <MagicWandIcon className="mr-2 h-5 w-5" />
+                    Remove Background
+                  </Button>
+                ) : (
+                  <div className="flex flex-col gap-3">
+                    <Button 
+                      onClick={handleDownload} 
+                      className="w-full h-14 text-base font-bold bg-primary hover:bg-primary/90 text-white transition-all rounded-2xl shadow-xl shadow-primary/20"
+                    >
+                      <DownloadIcon className="mr-2 h-5 w-5" />
+                      Download HD PNG
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      onClick={handleReset} 
+                      className="w-full h-12 text-sm font-bold text-zinc-400 hover:text-zinc-600 transition-all"
+                    >
+                      <ReloadIcon className="mr-2 h-4 w-4" />
+                      Upload Different Image
+                    </Button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
 
-// Image processing functions
+// ... (Rest of the processing functions remain same)
 function detectEdges(data: Uint8ClampedArray, width: number, height: number): Uint8Array {
   const grayscale = new Uint8Array(width * height)
   for (let i = 0; i < data.length; i += 4) {

@@ -4,7 +4,6 @@ import { Inter } from 'next/font/google'
 
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
-import { Footer } from '@/components/footer'
 import { PWARegistration } from '@/components/pwa-registration'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -50,15 +49,15 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider 
           attribute="class" 
-          defaultTheme="system" 
-          enableSystem 
+          defaultTheme="light" 
+          forcedTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <div className="flex min-h-screen flex-col">
-            <main className="flex-1 container py-6 px-4 md:px-6 lg:py-10">
+            <main className="flex-1">
               {children}
             </main>
-            <Footer />
           </div>
           <Toaster />
           <PWARegistration />

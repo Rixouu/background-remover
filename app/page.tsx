@@ -1,67 +1,47 @@
 import { ImageProcessor } from "@/components/image-processor"
-import { ThemeToggle } from "@/components/theme-toggle"
 import Image from "next/image"
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background transition-colors duration-500">
-      <div className="fixed top-6 right-6 z-50">
-        <ThemeToggle />
-      </div>
-
-      <div className="max-w-5xl mx-auto px-4 py-16 md:py-24 space-y-12">
-        <div className="flex flex-col items-center space-y-8 text-center">
-          <div className="icon-box h-16 w-16 md:h-20 md:w-20 transition-transform hover:scale-105 duration-300">
+    <main className="flex min-h-screen flex-col items-center justify-center p-4 md:p-24 bg-background">
+      <div className="w-full max-w-2xl bg-card rounded-[2.5rem] shadow-xl shadow-zinc-200/50 border border-zinc-100 p-8 md:p-12">
+        <div className="flex flex-col items-center mb-10 text-center">
+          <div className="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center text-white mb-6 shadow-xl shadow-primary/20 transition-transform hover:scale-105 duration-300">
             <Image 
               src="/icon-bg-remover.png" 
               alt="Logo" 
-              width={48} 
-              height={48} 
+              width={40} 
+              height={40} 
+              className="brightness-0 invert"
             />
           </div>
-          
-          <div className="space-y-4 max-w-2xl">
-            <h1 className="text-4xl md:text-6xl font-black tracking-tight text-foreground">
-              Link Background Remover
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground font-medium max-w-[600px] mx-auto leading-relaxed">
-              Create clean, professional images with premium background removal tools.
-            </p>
-          </div>
+          <h1 className="text-4xl font-bold tracking-tight text-zinc-900 mb-3">
+            Background Remover
+          </h1>
+          <p className="text-zinc-500 max-w-sm font-medium leading-relaxed">
+            Professional-grade background removal directly in your browser. No watermarks, no signups.
+          </p>
         </div>
-
-        <div className="animate-in fade-in slide-in-from-bottom-8 duration-1000">
-          <ImageProcessor />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-12">
-          <div className="p-8 rounded-3xl bg-secondary/50 border border-border flex flex-col gap-3">
-            <h3 className="text-lg font-bold text-foreground">Privacy First</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Your images are processed entirely in your browser. No data ever leaves your device.
-            </p>
+        
+        <ImageProcessor />
+        
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+          <div className="bg-zinc-50/50 rounded-2xl p-5 border border-zinc-100/80">
+            <h4 className="font-bold text-zinc-900 mb-1">Privacy First</h4>
+            <p className="text-zinc-500 leading-relaxed">Processed locally. Your images never leave your device.</p>
           </div>
-          <div className="p-8 rounded-3xl bg-secondary/50 border border-border flex flex-col gap-3">
-            <h3 className="text-lg font-bold text-foreground">HD Quality</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Export high-resolution PNGs with perfect transparency for any professional project.
-            </p>
+          <div className="bg-zinc-50/50 rounded-2xl p-5 border border-zinc-100/80">
+            <h4 className="font-bold text-zinc-900 mb-1">HD Export</h4>
+            <p className="text-zinc-500 leading-relaxed">High-resolution PNGs with perfect transparency.</p>
           </div>
         </div>
       </div>
-
-      <footer className="py-12 border-t border-border mt-12">
-        <div className="container flex flex-col items-center justify-center gap-4 text-center px-4">
-          <p className="text-sm font-bold text-muted-foreground/60">
-            Background Remover &copy; {new Date().getFullYear()}
-          </p>
-          <div className="flex items-center gap-6 text-[10px] uppercase tracking-widest font-black text-muted-foreground/30">
-            <span>Built with Next.js 16</span>
-            <span>Powered by AI</span>
-            <span>Open Source</span>
-          </div>
-        </div>
+      
+      <footer className="mt-12 text-center">
+        <p className="text-[10px] uppercase tracking-[0.2em] font-black text-zinc-300">
+          Built with Next.js & AI &bull; &copy; {new Date().getFullYear()}
+        </p>
       </footer>
-    </div>
+    </main>
   )
 }
