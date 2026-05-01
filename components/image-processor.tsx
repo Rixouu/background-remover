@@ -8,7 +8,7 @@ import {
   ImageIcon,
   GridIcon,
   ClockIcon,
-  PersonIcon,
+  GearIcon,
 } from "@radix-ui/react-icons"
 import { toast } from "sonner"
 import {
@@ -28,7 +28,7 @@ export function ImageProcessor() {
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const [mobileTab, setMobileTab] = useState<
-    "remove" | "batch" | "history" | "account"
+    "remove" | "batch" | "history" | "settings"
   >("remove")
 
   const [backgroundMode, setBackgroundMode] = useState<
@@ -127,14 +127,90 @@ export function ImageProcessor() {
     }
   }
 
-  const handleDownload = () => {
-    if (processedImage) {
-      const link = document.createElement('a')
-      link.href = processedImage
-      link.download = 'processed_image.png'
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+  const exportLabel = exportFormat.toUpperCase()
+  const exportFilename = `processed_image.${exportFormat}`
+
+  const getScaledSize = (width: number, height: number) => {
+    if (keepOriginalResolution) return { width, height }
+    const maxSide = 2048
+    const maxCurrent = Math.max(width, height)
+    if (maxCurrent <= maxSide) return { width, height }
+    const scale = maxSide / maxCurrent
+    return {
+      width: Math.max(1, Math.round(width * scale)),
+      height: Math.max(1, Math.round(height * scale)),
+    }
+  }
+
+  const loadImageFromDataUrl = (dataUrl: string) =>
+    new Promise<HTMLImageElement>((resolve, reject) => {
+      const img = new Image()
+      img.onload = () => resolve(img)
+      img.onerror = () => reject(new Error("Failed to load image"))
+      img.src = dataUrl
+    })
+
+  const canvasToBlob = (canvas: HTMLCanvasElement, type: string, quality?: number) =>
+    new Promise<Blob>((resolve, reject) => {
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) reject(new Error("Failed to create blob"))
+          else resolve(blob)
+        },
+        type,
+        quality,
+      )
+    })
+
+  const buildSvgWithEmbeddedPng = (pngDataUrl: string, width: number, height: number) => {
+    const svg = `<?xml version="1.0" encoding="UTF-8"?>` +
+      `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">` +
+      `<image href="${pngDataUrl}" width="${width}" height="${height}" />` +
+      `</svg>`
+    return new Blob([svg], { type: "image/svg+xml;charset=utf-8" })
+  }
+
+  const getExportBlob = async () => {
+    if (!processedImage) throw new Error("No processed image")
+    const img = await loadImageFromDataUrl(processedImage)
+    const baseWidth = img.naturalWidth || img.width
+    const baseHeight = img.naturalHeight || img.height
+    const { width, height } = getScaledSize(baseWidth, baseHeight)
+
+    const canvas = document.createElement("canvas")
+    canvas.width = width
+    canvas.height = height
+    const ctx = canvas.getContext("2d")
+    if (!ctx) throw new Error("Unable to get canvas context")
+    ctx.clearRect(0, 0, width, height)
+    ctx.drawImage(img, 0, 0, width, height)
+
+    if (exportFormat === "png") return canvasToBlob(canvas, "image/png")
+    if (exportFormat === "webp") return canvasToBlob(canvas, "image/webp", 0.95)
+
+    const pngForSvg = canvas.toDataURL("image/png")
+    return buildSvgWithEmbeddedPng(pngForSvg, width, height)
+  }
+
+  const downloadBlob = (blob: Blob, filename: string) => {
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement("a")
+    link.href = url
+    link.download = filename
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+  }
+
+  const handleDownload = async () => {
+    if (!processedImage) return
+    try {
+      const blob = await getExportBlob()
+      downloadBlob(blob, exportFilename)
+      toast.success(`Downloaded ${exportLabel}`)
+    } catch {
+      toast.error("Download failed")
     }
   }
 
@@ -142,11 +218,25 @@ export function ImageProcessor() {
     if (!processedImage) return
 
     try {
-      const blob = dataUrlToBlob(processedImage)
       const ClipboardItemCtor = (window as unknown as { ClipboardItem?: typeof ClipboardItem })
         .ClipboardItem
+      if (exportFormat === "svg") {
+        const blob = await getExportBlob()
+        const text = await blob.text()
+        await navigator.clipboard.writeText(text)
+        toast.success("Copied")
+        return
+      }
+
+      const blob = await getExportBlob()
       if (!ClipboardItemCtor) {
-        await navigator.clipboard.writeText(processedImage)
+        const dataUrl = await new Promise<string>((resolve, reject) => {
+          const reader = new FileReader()
+          reader.onload = () => resolve(String(reader.result))
+          reader.onerror = () => reject(new Error("Failed to read blob"))
+          reader.readAsDataURL(blob)
+        })
+        await navigator.clipboard.writeText(dataUrl)
         toast.success("Copied")
         return
       }
@@ -177,34 +267,50 @@ export function ImageProcessor() {
       />
 
       <div className="hidden md:flex min-h-screen flex-col bg-[#EEF4F8]">
-        <div className="flex items-center justify-between px-10 py-3 bg-white border-b border-[#E0EAF0]">
-          <div className="flex items-center gap-2.5">
-            <div className="h-[30px] w-[30px] rounded-[9px] bg-[linear-gradient(135deg,#29B6F6,#0288D1)] flex items-center justify-center">
-              <svg viewBox="0 0 24 24" className="h-[15px] w-[15px] fill-none stroke-white stroke-[2.2]">
-                <circle cx="12" cy="12" r="10" />
-                <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
-              </svg>
+        <div className="bg-white border-b border-[#E0EAF0]">
+          <div className="mx-auto w-full max-w-[1200px] flex items-center justify-between px-6 lg:px-10 py-3">
+            <div className="flex items-center gap-2.5">
+              <div className="h-[30px] w-[30px] rounded-[9px] bg-[linear-gradient(135deg,#29B6F6,#0288D1)] flex items-center justify-center">
+                <svg viewBox="0 0 24 24" className="h-[15px] w-[15px] fill-none stroke-white stroke-[2.2]">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
+                </svg>
+              </div>
+              <span className="text-[14px] font-semibold text-[#0A1E2A] tracking-[-0.2px]">
+                Background Remover
+              </span>
             </div>
-            <span className="text-[14px] font-semibold text-[#0A1E2A] tracking-[-0.2px]">
-              Background Remover
-            </span>
-          </div>
-          <div className="flex items-center gap-2">
-            <button className="text-[12px] text-[#6A90A8] px-2.5 py-1.5 rounded-[7px] hover:bg-[#F0F6FA]">
-              How it works
-            </button>
-            <button className="text-[12px] text-[#6A90A8] px-2.5 py-1.5 rounded-[7px] hover:bg-[#F0F6FA]">
-              Privacy
-            </button>
-            <button className="text-[12px] font-medium px-3.5 py-1.5 rounded-[8px] bg-[#0EA5E9] text-white">
-              Try Pro
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                className="text-[12px] text-[#6A90A8] px-2.5 py-1.5 rounded-[7px] hover:bg-[#F0F6FA]"
+                onClick={openFilePicker}
+                type="button"
+              >
+                Upload
+              </button>
+              <button
+                className="text-[12px] text-[#6A90A8] px-2.5 py-1.5 rounded-[7px] hover:bg-[#F0F6FA] disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={handleReset}
+                disabled={!originalImage}
+                type="button"
+              >
+                Reset
+              </button>
+              <button
+                className="text-[12px] font-medium px-3.5 py-1.5 rounded-[8px] bg-[#0EA5E9] text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={() => void handleDownload()}
+                disabled={!processedImage}
+                type="button"
+              >
+                Download {exportLabel}
+              </button>
+            </div>
           </div>
         </div>
 
-        <div className="relative overflow-hidden text-center px-10 pt-14 pb-12 bg-[linear-gradient(135deg,#E8F4FC_0%,#F0F8FF_50%,#E4F0F8_100%)] border-b border-[#D8EAF4]">
+        <div className="relative overflow-hidden border-b border-[#D8EAF4] bg-[linear-gradient(135deg,#E8F4FC_0%,#F0F8FF_50%,#E4F0F8_100%)]">
           <div className="absolute left-1/2 top-[-120px] h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(14,165,233,0.07)_0%,transparent_70%)]" />
-          <div className="relative">
+          <div className="mx-auto w-full max-w-[1200px] relative text-center px-6 lg:px-10 pt-14 pb-12">
             <div className="inline-flex items-center gap-1.5 bg-white border border-[#BAE6FD] rounded-[20px] px-3 py-1 mb-5 shadow-[0_1px_4px_rgba(14,165,233,0.08)]">
               <svg viewBox="0 0 24 24" className="h-[11px] w-[11px] fill-none stroke-[#0EA5E9] stroke-[2.5]">
                 <polyline points="20,6 9,17 4,12" />
@@ -254,7 +360,9 @@ export function ImageProcessor() {
           </div>
         </div>
 
-        <div className="grid grid-cols-[minmax(0,1fr)_300px] flex-1 min-h-0 overflow-hidden max-h-[calc(100vh-200px)]">
+        <div className="flex-1 min-h-0">
+          <div className="mx-auto w-full max-w-[1200px] px-6 lg:px-10">
+            <div className="grid grid-cols-[minmax(0,1fr)_300px] flex-1 min-h-0 overflow-hidden max-h-[calc(100vh-220px)] rounded-[18px] my-6 bg-white border border-[#D8EAF4]">
           <div className="p-7 px-8 overflow-y-auto bg-[#EEF4F8] flex flex-col gap-4">
             <div className="bg-white border border-[#D8EAF4] rounded-[18px] overflow-hidden shadow-[0_1px_6px_rgba(14,165,233,0.05)]">
               <div
@@ -337,12 +445,12 @@ export function ImageProcessor() {
                   </button>
                   <button
                     className="inline-flex items-center gap-1.5 text-[11px] px-2.5 py-1.5 rounded-[7px] border border-[#0EA5E9] bg-[#0EA5E9] text-white disabled:opacity-50 disabled:cursor-not-allowed"
-                    onClick={handleDownload}
+                    onClick={() => void handleDownload()}
                     disabled={!processedImage}
                     type="button"
                   >
                     <DownloadIcon />
-                    Download PNG
+                    Download {exportLabel}
                   </button>
                 </div>
               </div>
@@ -701,12 +809,12 @@ export function ImageProcessor() {
             <div className="p-4 mt-auto">
               <button
                 className="w-full bg-[#0EA5E9] rounded-[11px] py-3 text-white font-semibold text-[13px] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                onClick={handleDownload}
+                onClick={() => void handleDownload()}
                 disabled={!processedImage}
                 type="button"
               >
                 <DownloadIcon />
-                Download PNG
+                Download {exportLabel}
               </button>
               <button
                 className="w-full mt-2 bg-[#F0F7FB] border border-[#C8E0EE] rounded-[11px] py-2.5 text-[#3A6A88] font-medium text-[12px] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -720,6 +828,8 @@ export function ImageProcessor() {
             </div>
           </div>
         </div>
+          </div>
+        </div>
 
         <div className="text-center py-3.5 text-[10px] text-[#A0B8C8] tracking-[0.08em] uppercase bg-[#EEF4F8]">
           Built with Next.js & AI &nbsp;·&nbsp; © {new Date().getFullYear()}
@@ -728,22 +838,6 @@ export function ImageProcessor() {
 
       <div className="md:hidden min-h-screen bg-[#DDEEF8]">
         <div className="mx-auto w-full max-w-[420px] bg-[#F4F9FD] min-h-screen flex flex-col relative">
-          <div className="flex items-center justify-between px-5 pt-[14px] pb-[6px] bg-[#F4F9FD]">
-            <span className="text-[13px] font-semibold text-[#0A1E2A]">9:41</span>
-            <div className="flex items-center gap-1.5">
-              <svg viewBox="0 0 24 24" className="h-[14px] w-[14px] fill-none stroke-[#7AAAC0] stroke-[2]">
-                <path d="M1 6s4.5-4 11-4 11 4 11 4" />
-                <path d="M5 10s2.5-3 7-3 7 3 7 3" />
-                <path d="M9 14s1.5-2 3-2 3 2 3 2" />
-                <circle cx="12" cy="18" r="1" fill="#7AAAC0" />
-              </svg>
-              <svg viewBox="0 0 24 24" className="h-[14px] w-[14px] fill-none stroke-[#7AAAC0] stroke-[2]">
-                <rect x="2" y="7" width="18" height="11" rx="2" />
-                <path d="M22 11v3" />
-              </svg>
-            </div>
-          </div>
-
           <div className="flex items-center justify-between px-[18px] pt-[9px] pb-3 bg-[#F4F9FD] border-b border-[#D8EAF4]">
             <div className="flex items-center gap-2">
               <div className="h-[28px] w-[28px] rounded-[8px] bg-[linear-gradient(135deg,#29B6F6,#0288D1)] flex items-center justify-center">
@@ -756,9 +850,23 @@ export function ImageProcessor() {
                 BG Remover
               </span>
             </div>
-            <button className="text-[11px] font-medium px-3 py-1 rounded-[7px] bg-[#0EA5E9] text-white">
-              Try Pro
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                className="text-[11px] font-medium px-3 py-1 rounded-[7px] bg-[#EAF4FC] border border-[#BAE6FD] text-[#0284C7] disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={handleReset}
+                disabled={!originalImage}
+                type="button"
+              >
+                Reset
+              </button>
+              <button
+                className="text-[11px] font-medium px-3 py-1 rounded-[7px] bg-[#0EA5E9] text-white"
+                onClick={openFilePicker}
+                type="button"
+              >
+                Upload
+              </button>
+            </div>
           </div>
 
           <div className="pb-[calc(96px+env(safe-area-inset-bottom))]">
@@ -884,12 +992,12 @@ export function ImageProcessor() {
                         </button>
                         <button
                           className="inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded-[6px] border border-[#0EA5E9] bg-[#0EA5E9] text-white disabled:opacity-50 disabled:cursor-not-allowed"
-                          onClick={handleDownload}
+                          onClick={() => void handleDownload()}
                           disabled={!processedImage}
                           type="button"
                         >
                           <DownloadIcon />
-                          Save PNG
+                          Save {exportLabel}
                         </button>
                       </div>
                     </div>
@@ -1098,12 +1206,12 @@ export function ImageProcessor() {
                 <div className="px-3.5 py-3.5 bg-[#F4F9FD] border-t border-[#D8EAF4] flex flex-col gap-2">
                   <button
                     className="w-full bg-[#0EA5E9] rounded-[11px] py-3 text-white font-semibold text-[13px] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                    onClick={handleDownload}
+                    onClick={() => void handleDownload()}
                     disabled={!processedImage}
                     type="button"
                   >
                     <DownloadIcon />
-                    Download PNG
+                    Download {exportLabel}
                   </button>
                   <button
                     className="w-full bg-[#EAF4FC] border border-[#BAE6FD] rounded-[11px] py-2.5 text-[#0284C7] font-medium text-[12px] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -1124,7 +1232,7 @@ export function ImageProcessor() {
                       ? "Batch"
                       : mobileTab === "history"
                         ? "History"
-                        : "Account"}
+                        : "Settings"}
                   </div>
                   <div className="text-[12px] text-[#7AA0B8] leading-[1.6]">
                     This section is ready for the page system in the bottom menu.
@@ -1142,7 +1250,7 @@ export function ImageProcessor() {
                     { key: "remove", label: "Remove", icon: ImageIcon },
                     { key: "batch", label: "Batch", icon: GridIcon },
                     { key: "history", label: "History", icon: ClockIcon },
-                    { key: "account", label: "Account", icon: PersonIcon },
+                    { key: "settings", label: "Settings", icon: GearIcon },
                   ] as const
                 ).map((item) => {
                   const isOn = mobileTab === item.key
