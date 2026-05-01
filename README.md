@@ -28,6 +28,14 @@ Background Remover is a modern, privacy-focused web application built around one
 - **Styling**: Tailwind CSS 4, CSS Variables.
 - **Processing**: Client-side Canvas API & AI Edge Detection.
 - **Components**: Radix UI, Lucide React, Shadcn UI.
+- **Testing**: Vitest.
+
+### 🎨 UI
+- **Desktop + Mobile**: UI is implemented to match the mockups in `mockup/`.
+- **Mobile app feel**: Bottom-tab page system (Remove / Batch / History / Account) with safe-area friendly layout.
+- Mockup reference:
+  - Desktop: `mockup/bgremover-desktop.html`
+  - Mobile: `mockup/bgremover-mobile.html`
 
 ### 🚀 Getting Started
 
@@ -52,12 +60,25 @@ npm run build
 npm run start
 ```
 
+#### Unit Tests
+```bash
+npm test
+```
+
+Watch mode:
+```bash
+npm run test:watch
+```
+
 ### 🧩 How It Works
 The application leverages a multi-stage processing pipeline:
 1. **Sobel Edge Detection**: Identifies sharp transitions in image intensity.
 2. **Color Sampling**: Analyzes background regions for dominant color patterns.
 3. **Mask Generation**: Creates a precise alpha mask combining edge and color data.
 4. **Refinement**: Smooths boundaries to prevent "jagged" edges.
+
+### 📚 Development Notes
+See `docs/DEVELOPMENT.md`.
 
 ### 🤝 Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
