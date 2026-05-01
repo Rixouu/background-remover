@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Remove the experimental section if it only contained appDir
+  async redirects() {
+    return [
+      { source: "/en", destination: "/", permanent: false },
+      { source: "/en/:path*", destination: "/:path*", permanent: false },
+    ]
+  },
 }
 
 module.exports = nextConfig
